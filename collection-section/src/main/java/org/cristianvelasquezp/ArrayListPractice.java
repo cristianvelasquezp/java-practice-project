@@ -149,5 +149,91 @@ public class ArrayListPractice implements PrintExamples {
         countries.sort(Comparator.naturalOrder());
         System.out.println("ArrayList after sorting in ascending order: " + countries);
 
+        // Sorting the ArrayList using a custom comparator
+        countries.sort(new LastCharComparator());
+        System.out.println("ArrayList after sorting using a custom comparator: " + countries);
+
+        // Sorting the ArrayList using a Comparable interface implementation in a type
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("Alice", 25));
+        people.add(new Person("Eve", 30));
+        people.add(new Person("Charlie", 20));
+        people.add(new Person("David", 35));
+        people.add(new Person("Bob", 30));
+
+        System.out.println("People before sorting: " + people);
+        Collections.sort(people);
+        System.out.println("People after sorting: " + people);
+
+        List<Person> people2 = new ArrayList<>();
+        people2.add(new Person("Alice", 25));
+        people2.add(new Person("Eve", 30));
+        people2.add(new Person("Charlie", 20));
+        people2.add(new Person("David", 35));
+        people2.add(new Person("Bob", 30));
+
+        people2.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return Integer.compare(o1.getAge(), o2.getAge());
+            }
+        });
+
+        System.out.println("People after sorting using a custom comparator: " + people2);
+
+        /*
+         * When to use Comparable and Comparator?
+         * The best wey to decide is to use Comparable when you have a natural order for the objects and use
+         * Comparator when you have multiple ways to sort the objects.
+         *
+         * Comparable is good when you have a class and you can implement the Comparable interface in the class itself.
+         * Comparator is good when you have a class and you can't modify the class, so you can create a separate class
+         * and implement the Comparator interface.
+         */
+
+
+    }
+
+    static class LastCharComparator implements Comparator<String> {
+        public int compare(String s1, String s2) {
+            char c1 = s1.charAt(s1.length() - 1);
+            char c2 = s2.charAt(s2.length() - 1);
+            return Character.compare(c1, c2);
+        }
+    }
+
+    class Person implements Comparable<Person> {
+        private String name;
+        private int age;
+
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+
+        @Override
+        public int compareTo(Person o) {
+            int compareAge = Integer.compare(this.age, o.age);
+            if (compareAge == 0) {
+                return this.name.compareTo(o.name);
+            }
+            return compareAge;
+        }
     }
 }
