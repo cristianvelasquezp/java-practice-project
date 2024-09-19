@@ -1,5 +1,7 @@
 package org.cristianvelasquezp;
 
+import org.cristianvelasquezp.multithreading.ThreadPractice;
+
 import java.util.*;
 
 public class Main {
@@ -7,17 +9,22 @@ public class Main {
 
 
         //ArrayList
-        ArrayListPractice arrayListPractice = new ArrayListPractice();
-        arrayListPractice.printExamples();
+        //PrintExamples arrayListPractice = new ArrayListPractice();
+        //arrayListPractice.printExamples();
 
         //List
-        ListPractice listPractice = new ListPractice();
-        listPractice.printExamples();
+        //PrintExamples listPractice = new ListPractice();
+        //listPractice.printExamples();
 
 
         // LinkedList
 
 
         // Collections methods
+
+
+        // Thread
+        PrintExamples threadPractice = new ThreadPractice();
+        threadPractice.printExamples();
     }
 }
